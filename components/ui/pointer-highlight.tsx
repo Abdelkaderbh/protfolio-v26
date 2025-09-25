@@ -18,34 +18,27 @@ export function PointerHighlight({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    if (containerRef.current) {
-      const { width, height } = containerRef.current.getBoundingClientRect();
-      setDimensions({ width, height });
-    }
+    const el = containerRef.current;
+    if (!el) return;
+
+    const { width, height } = el.getBoundingClientRect();
+    setDimensions({ width, height });
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensions({ width, height });
+        const { width: w, height: h } = entry.contentRect;
+        setDimensions({ width: w, height: h });
       }
     });
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
+    resizeObserver.observe(el);
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
-      }
+      resizeObserver.unobserve(el);
     };
   }, []);
 
   return (
-    <div
-      className={cn("relative w-fit", containerClassName)}
-      ref={containerRef}
-    >
+    <div className={cn("relative w-fit", containerClassName)} ref={containerRef}>
       {children}
       {dimensions.width > 0 && dimensions.height > 0 && (
         <motion.div
@@ -59,18 +52,12 @@ export function PointerHighlight({
               "absolute inset-0 border border-neutral-800 dark:border-neutral-200",
               rectangleClassName
             )}
-            initial={{
-              width: 0,
-              height: 0,
-            }}
+            initial={{ width: 0, height: 0 }}
             whileInView={{
               width: dimensions.width,
               height: dimensions.height,
             }}
-            transition={{
-              duration: 1,
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 1, ease: "easeInOut" }}
           />
           <motion.div
             className="pointer-events-none absolute"
@@ -80,18 +67,14 @@ export function PointerHighlight({
               x: dimensions.width + 4,
               y: dimensions.height + 4,
             }}
-            style={{
-              rotate: -90,
-            }}
+            style={{ rotate: -90 }}
             transition={{
               opacity: { duration: 0.1, ease: "easeInOut" },
               duration: 1,
               ease: "easeInOut",
             }}
           >
-            <Pointer
-              className={cn("h-5 w-5 text-blue-500", pointerClassName)}
-            />
+            <Pointer className={cn("h-5 w-5 text-blue-500", pointerClassName)} />
           </motion.div>
         </motion.div>
       )}
@@ -113,7 +96,7 @@ const Pointer = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"></path>
+      <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z" />
     </svg>
   );
 };
