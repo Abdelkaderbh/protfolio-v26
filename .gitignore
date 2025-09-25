@@ -20,10 +20,6 @@
 # production
 /build
 
-#Images
-/src/images
-
-
 # misc
 .DS_Store
 *.pem
