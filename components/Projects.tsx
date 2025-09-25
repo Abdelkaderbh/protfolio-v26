@@ -10,8 +10,8 @@ const Projects = () => {
           Projects
         </h2>
         <h4 className="text-center">
-          The list of my latest contributed project "you can visit the link of
-          the project by clicking on project name when hovering the card"
+          The list of my latest contributed project &apos;you can visit the link of
+          the project by clicking on project name when hovering the card&apos;
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 md:gap-y-20 gap-x-8 lg:gap-x-12 place-items-center">
           {projects.map((project, index) => (

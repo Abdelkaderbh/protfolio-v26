@@ -46,9 +46,13 @@ const Contact = () => {
       setStatus("success");
       setServerMessage(data.message || "Message sent successfully!");
       setForm({ name: "", email: "", subject: "", message: "" });
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setServerMessage(err.message || "Failed to send. Please try again.");
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Failed to send. Please try again.";
+      setServerMessage(message);
     }
   }
 
@@ -60,7 +64,7 @@ const Contact = () => {
         </h2>
         <p className="text-center text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
           Have a question, project idea, or just want to say hi? Fill out the
-          form below and I'll get back to you as soon as possible.
+          form below and I&apos;ll get back to you as soon as possible.
         </p>
         <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -33,7 +33,7 @@ const Hero = () => {
             <span className="relative z-10">Abdelkader Ben Hassan</span>
           </PointerHighlight>
           <motion.div className="relative mt-8 sm:mt-12 flex flex-col items-center justify-start gap-1 text-center lg:items-start lg:text-left sm:flex-row">
-            <span className="whitespace-nowrap mr-0 sm:mr-2">I'm a</span>
+            <span className="whitespace-nowrap mr-0 sm:mr-2">I&apos;m a</span>
             <div className="min-w-0 mt-1 sm:mt-0">
               <LayoutTextFlip
                 text=""
@@ -95,13 +95,16 @@ const Hero = () => {
         </div>
       </div>
 
-  <button className="p-[3px] relative mr-5 cursor-pointer">
+      <button className="p-[3px] relative mr-5 cursor-pointer">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
         <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
           Contact Me
         </div>
       </button>
-  <button className="p-[3px] relative cursor-pointer" onClick={handleDownloadCV}>
+      <button
+        className="p-[3px] relative cursor-pointer"
+        onClick={handleDownloadCV}
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
         <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
           Download CV

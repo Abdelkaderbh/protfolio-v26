@@ -40,21 +40,21 @@ const About = () => {
           <div className="space-y-6">
             <div className="space-y-4">
               <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white">
-                Hello, I'm Abdelkader Ben Hassan
+                Hello, I&apos;m Abdelkader Ben Hassan
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                I'm a passionate developer with expertise in modern web
+                I&apos;m a passionate developer with expertise in modern web
                 technologies. I love creating beautiful, functional, and
                 user-friendly applications that solve real-world problems.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 With years of experience in frontend and backend development, I
                 specialize in React, Next.js, TypeScript, and modern web
-                frameworks. I'm always eager to learn new technologies and take
+                frameworks. I&apos;m always eager to learn new technologies and take
                 on challenging projects.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                When I'm not coding, you can find me exploring new technologies,
+                When I&apos;m not coding, you can find me exploring new technologies,
                 contributing to open-source projects, or sharing my knowledge
                 with the developer community.
               </p>

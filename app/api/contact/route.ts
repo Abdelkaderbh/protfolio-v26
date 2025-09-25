@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+type SendResult = { ok: true } | { ok: false; error: string };
+
+interface SendParams {
+  name: string;
+  email: string;
+  subject: string;
+  textBody: string;
+  htmlBody: string;
+}
+
 // --- Resend configuration ---
 // Required: RESEND_API_KEY (kept server-side). Optional: RESEND_FROM (use verified domain when ready)
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -9,7 +19,7 @@ const RESEND_FROM = process.env.RESEND_FROM || "Portfolio Contact <onboarding@re
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-async function sendWithResend(params: { name: string; email: string; subject: string; textBody: string; htmlBody: string; }) {
+async function sendWithResend(params: SendParams): Promise<SendResult> {
   if (!resend) return { ok: false, error: "RESEND_API_KEY not configured" };
   try {
     const { error } = await resend.emails.send({
@@ -22,14 +32,20 @@ async function sendWithResend(params: { name: string; email: string; subject: st
     });
     if (error) return { ok: false, error: error.message };
     return { ok: true };
-  } catch (e: any) {
-    return { ok: false, error: e?.message || "Resend send failed" };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Resend send failed";
+    return { ok: false, error: message };
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
+    const body = await req.json() as Partial<{
+      name: string;
+      email: string;
+      subject: string;
+      message: string;
+    }>;
     const { name, email, subject, message } = body || {};
 
     // Basic validation
@@ -53,7 +69,15 @@ export async function POST(req: NextRequest) {
     // Build plain text + HTML versions
     const sanitizedMessage = String(message).replace(/</g, "&lt;");
     const textBody = `New contact form submission\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage:\n${message}`;
-    const htmlBody = `<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#111\">\n  <h2 style=\"margin:0 0 12px\">New Contact Form Submission</h2>\n  <p><strong>Name:</strong> ${name}</p>\n  <p><strong>Email:</strong> ${email}</p>\n  <p><strong>Subject:</strong> ${subject}</p>\n  <p style=\"white-space:pre-wrap\"><strong>Message:</strong><br/>${sanitizedMessage}</p>\n  <hr style=\"margin:24px 0;border:none;border-top:1px solid #e5e5e5\"/>\n  <p style=\"font-size:12px;color:#666\">Sent from your portfolio contact form.</p>\n</div>`;
+    const htmlBody = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#111">
+  <h2 style="margin:0 0 12px">New Contact Form Submission</h2>
+  <p><strong>Name:</strong> ${name}</p>
+  <p><strong>Email:</strong> ${email}</p>
+  <p><strong>Subject:</strong> ${subject}</p>
+  <p style="white-space:pre-wrap"><strong>Message:</strong><br/>${sanitizedMessage}</p>
+  <hr style="margin:24px 0;border:none;border-top:1px solid #e5e5e5"/>
+  <p style="font-size:12px;color:#666">Sent from your portfolio contact form.</p>
+</div>`;
 
     // Only use Resend (simplified as requested)
     const result = await sendWithResend({ name, email, subject, textBody, htmlBody });
@@ -65,8 +89,8 @@ export async function POST(req: NextRequest) {
       );
     }
     return NextResponse.json({ success: true, message: "Your message has been sent!" });
-  } catch (e: any) {
-    console.error("/api/contact error", e);
+  } catch (err: unknown) {
+    console.error("/api/contact error", err);
     return NextResponse.json(
       { success: false, message: "Server error. Please try again later." },
       { status: 500 }
