@@ -2,7 +2,7 @@
     {
       title: "SerOps Project",
       description:
-        "A Web platform where you can monitor your servers and services in real-time and our IA model will auto analysing and suggesting action to fix the isssues detected.",
+        "A Web platform where you can monitor your servers and services in real-time and the IA model will auto analyse and suggest actions to fix the issues detected.",
       href: "http://5.161.252.26:3003",
       gradient: "from-violet-500 via-purple-500 to-blue-500",
     },
