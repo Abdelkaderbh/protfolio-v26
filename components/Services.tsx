@@ -66,14 +66,16 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-16">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16 mt-8">
-        Services
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 max-w-7xl mx-auto">
-        {features.map((feature, index) => (
-          <Feature key={feature.title} {...feature} index={index} />
-        ))}
+    <section id="services" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 mt-4 sm:mt-6 md:mt-8">
+          Services
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 relative z-10 py-6 sm:py-8 md:py-10">
+          {features.map((feature, index) => (
+            <Feature key={feature.title} {...feature} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
