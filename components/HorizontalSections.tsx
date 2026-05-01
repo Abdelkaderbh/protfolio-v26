@@ -62,44 +62,6 @@ export default function HorizontalSections({
       }
     };
 
-    const onWheel = (event: WheelEvent) => {
-      if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) {
-        return;
-      }
-
-      const activePanel = container.querySelector<HTMLElement>(
-        `[data-panel-index='${indexRef.current}']`,
-      );
-      if (activePanel) {
-        const canScrollDown =
-          activePanel.scrollTop + activePanel.clientHeight <
-          activePanel.scrollHeight - 1;
-        const canScrollUp = activePanel.scrollTop > 1;
-
-        if (
-          (event.deltaY > 0 && canScrollDown) ||
-          (event.deltaY < 0 && canScrollUp)
-        ) {
-          return;
-        }
-      }
-
-      event.preventDefault();
-
-      if (lockRef.current) {
-        return;
-      }
-
-      lockRef.current = true;
-
-      const direction = event.deltaY > 0 ? 1 : -1;
-      goToIndex(indexRef.current + direction);
-
-      window.setTimeout(() => {
-        lockRef.current = false;
-      }, WHEEL_LOCK_MS);
-    };
-
     const onResize = () => {
       goToIndex(indexRef.current, "auto");
     };
@@ -123,8 +85,6 @@ export default function HorizontalSections({
         goToIndex(panelIndex);
       }
     };
-
-    container.addEventListener("wheel", onWheel, { passive: false });
     container.addEventListener("scroll", onScroll);
     window.addEventListener("resize", onResize);
     window.addEventListener("hashchange", onHashChange);
@@ -140,7 +100,6 @@ export default function HorizontalSections({
     onHashChange();
 
     return () => {
-      container.removeEventListener("wheel", onWheel);
       container.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("hashchange", onHashChange);

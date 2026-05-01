@@ -11,7 +11,7 @@ import Link from "next/link";
 const Hero = () => {
   const handleDownloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/documents/CV_Abdelkader_Ben_Hassan.pdf";
+    link.href = "/documents/Abdelkader_Ben_Hassan_CV.pdf";
     link.download = "Abdelkader_Ben_Hassan_CV.pdf";
     document.body.appendChild(link);
     link.click();
@@ -116,14 +116,14 @@ const Hero = () => {
         <div className="flex-1 flex justify-center lg:justify-end order-first lg:order-last mb-6 sm:mb-8 lg:mb-0">
           <div className="relative">
             {/* Circular background */}
-            <div className="w-64 h-64 xs:w-72 xs:h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] xl:w-[32rem] xl:h-[32rem] rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 shadow-xl sm:shadow-2xl"></div>
+            <div className="w-56 h-56 xs:w-64 xs:h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[24rem] lg:h-[24rem] xl:w-[28rem] xl:h-[28rem] rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 shadow-xl sm:shadow-2xl"></div>
 
             {/* Image container - perfectly centered */}
             <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center overflow-hidden">
               <Image
                 src={myPic}
                 alt="my-picture"
-                className="w-full h-full object-cover object-center scale-90"
+                className="w-full h-full object-cover object-center"
                 priority
                 sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, (max-width: 1024px) 384px, (max-width: 1280px) 448px, 512px"
               />

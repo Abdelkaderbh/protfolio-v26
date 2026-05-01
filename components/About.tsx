@@ -7,7 +7,7 @@ import MyPic from "../src/images/MyImg.png";
 const About = () => {
   const handleDownloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/documents/CV_Abdelkader_Ben_Hassan.pdf";
+    link.href = "/documents/Abdelkader_Ben_Hassan_CV.pdf";
     link.download = "Abdelkader_Ben_Hassan_CV.pdf";
     document.body.appendChild(link);
     link.click();
