@@ -23,8 +23,8 @@ const About = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 items-center">
           {/* Left side - Big picture */}
-          <div className="flex justify-center lg:justify-start order-first lg:order-first">
-            <div className="relative w-full max-w-[12rem] sm:max-w-[13rem] md:max-w-[15rem] lg:max-w-[17rem] xl:max-w-[19rem]">
+          <div className="flex justify-center order-first lg:order-first">
+            <div className="relative w-full max-w-[12rem] sm:max-w-[13rem] md:max-w-[15rem] lg:max-w-[20rem] xl:max-w-[24rem]">
               {/* Simple background */}
               <div className="absolute inset-0 bg-blue-100 dark:bg-blue-900/20 rounded-xl sm:rounded-2xl transform -rotate-2 scale-105"></div>
               <div className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl lg:shadow-2xl w-full border-2 border-white dark:border-gray-800">
