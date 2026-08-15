@@ -38,7 +38,14 @@ export function PointerHighlight({
   }, []);
 
   return (
-    <div className={cn("relative w-fit", containerClassName)} ref={containerRef}>
+    <div
+      className={cn(
+        // use inline-block so the element respects parent's `text-center`
+        "relative w-fit inline-block",
+        containerClassName,
+      )}
+      ref={containerRef}
+    >
       {children}
       {dimensions.width > 0 && dimensions.height > 0 && (
         <motion.div
@@ -50,7 +57,7 @@ export function PointerHighlight({
           <motion.div
             className={cn(
               "absolute inset-0 border border-neutral-800 dark:border-neutral-200",
-              rectangleClassName
+              rectangleClassName,
             )}
             initial={{ width: 0, height: 0 }}
             whileInView={{
@@ -74,7 +81,9 @@ export function PointerHighlight({
               ease: "easeInOut",
             }}
           >
-            <Pointer className={cn("h-5 w-5 text-blue-500", pointerClassName)} />
+            <Pointer
+              className={cn("h-5 w-5 text-blue-500", pointerClassName)}
+            />
           </motion.div>
         </motion.div>
       )}
